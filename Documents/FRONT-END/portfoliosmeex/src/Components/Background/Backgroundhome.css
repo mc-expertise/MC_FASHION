@@ -1,0 +1,69 @@
+.homeback__containe {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--darkback);
+  position: relative;
+  overflow-y: hidden;
+  background-color: var(--darkback);
+}
+
+.homeback__bubbles {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  background-color: var(--darkback);
+}
+
+.homeback__bubbles span {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: var(--colorspan);
+  margin: 0 4px;
+  border-radius: 50%;
+  box-shadow: 0 0 0 10px #4fc3dc44, 0 0 50px #4fc3dc, 0 0 100px #4fc3dc;
+  animation: animationhome 15s linear infinite;
+}
+.homeback__bubbles .span1 {
+  animation-duration: calc(120s / var(--i1));
+}
+.homeback__bubbles .span2 {
+  animation-duration: calc(120s / var(--i2));
+}
+.homeback__bubbles .span3 {
+  animation-duration: calc(120s / var(--i3));
+}
+.homeback__bubbles .span4 {
+  animation-duration: calc(120s / var(--i4));
+}
+.homeback__bubbles .span5 {
+  animation-duration: calc(120s / var(--i5));
+}
+.homeback__bubbles .span6 {
+  animation-duration: calc(120s / var(--i6));
+}
+.homeback__bubbles .span7 {
+  animation-duration: calc(120s / var(--i7));
+}
+.homeback__bubbles .span8 {
+  animation-duration: calc(120s / var(--i8));
+}
+.homeback__bubbles .span9 {
+  animation-duration: calc(120s / var(--i9));
+}
+.homeback__bubbles .span10 {
+  animation-duration: calc(120s / var(--i10));
+}
+.homeback__bubbles span:nth-child(even) {
+  background-color: #ff2d75;
+  box-shadow: 0 0 0 10px #ff2d7544, 0 0 50px #ff2d75, 0 0 100px #ff2d75;
+}
+
+@keyframes animationhome {
+  0% {
+    transform: translateY(100vh) scale(0);
+  }
+  100% {
+    transform: translateY(-20vh) scale(1);
+  }
+}

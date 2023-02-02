@@ -1,0 +1,131 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--darkback);
+  position: relative;
+}
+.cursor__perso {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  border: 1px solid var(--lightback);
+  pointer-events: none;
+}
+.cursor__perso::before {
+  content: '';
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  background-color: white;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Unbounded', cursive;
+  font-weight: 200;
+}
+
+body {
+  background-color: var(--darkback);
+  color: var(--lightback);
+}
+
+.ul li::before {
+  content: '';
+  width: 100%;
+  height: 1px;
+  background-color: var(--lightback);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-110%);
+  transition: 0.4s;
+}
+.ul li:hover::before {
+  transform: translateX(0%);
+}
+
+:root {
+  --darkback: #0c192c;
+  --lightback: #eae9f0;
+  --colorspan: #4fc3dc;
+  --colorshadow: #4fc3dc44;
+  --i1: 11;
+  --i2: 12;
+  --i3: 24;
+  --i4: 10;
+  --i5: 14;
+  --i6: 23;
+  --i7: 18;
+  --i8: 16;
+  --i9: 19;
+  --i10: 20;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+.global__container {
+  padding: 2rem 3rem;
+}
+.border__img {
+  width: 100%;
+  height: fit-content;
+  position: absolute;
+  left: 0;
+  bottom: 145px;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+
+body {
+  overflow-y: hidden;
+}
+
+a {
+  text-decoration: none;
+  color: var(--lightback);
+  font-size: 20px;
+  font-weight: 500;
+  transition: 0.4s;
+}
+
+li {
+  list-style: none;
+}
+
+img {
+  pointer-events: none;
+}
+
+.title__pages {
+  font-size: 70px;
+  font-weight: 700;
+  padding: 1rem 0;
+  position: relative;
+}
+
+.title__pages::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 3px;
+  background-color: var(--lightback);
+  bottom: 0;
+  left: 0;
+}
+
+@media screen and (max-width: 615px) {
+  .title__pages {
+    font-size: 60px;
+  }
+}

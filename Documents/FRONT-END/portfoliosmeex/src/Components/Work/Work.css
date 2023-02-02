@@ -1,0 +1,75 @@
+.work__pages {
+  height: 100vh;
+  background-color: var(--darkback);
+}
+
+.menu__items {
+  position: absolute;
+  left: 40%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 54%;
+}
+
+.work__links {
+  font-size: 72px;
+  font-weight: 900;
+  letter-spacing: 8px;
+  transition: 0.4s;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+
+.menu__items ul li:hover .work__links {
+  letter-spacing: 0;
+}
+.work__social ul {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.work__social ul li {
+  padding: 1rem 0;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.work__social ul li a {
+  font-weight: 200;
+}
+.arrow__work {
+  color: var(--lightback);
+  transform: rotate(-45deg);
+}
+/* BreakPoints */
+@media screen and (max-width: 992px) {
+  .work__links {
+    font-size: 50px;
+    margin-bottom: 1rem;
+  }
+  .menu__items {
+    width: 64%;
+  }
+}
+@media screen and (max-width: 615px) {
+  .work__links {
+    font-size: 30px;
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .work__links {
+    font-size: 24px;
+    margin-bottom: 1rem;
+  }
+  .menu__items {
+    width: 64%;
+  }
+  .work__social ul {
+    flex-direction: column;
+    gap: 0;
+  }
+}
