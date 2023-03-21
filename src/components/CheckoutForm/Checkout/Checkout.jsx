@@ -10,18 +10,23 @@ import {
   Button,
 } from '@material-ui/core';
 import useStyles from './Style';
-import AdressForm from '../AdressForm';
+import AddressForm from '../AddressForm';
 import PaymentForm from '../PaymentForm';
 import { commerce } from '../../../libs/commerce';
 import { CommerceContext } from '../../CommerceProvider';
+import { Link, useNavigate } from 'react-router-dom';
 
 const steps = ['Adresse de livraison', 'Détails de paiement'];
 
 const Checkout = () => {
-  const { cart } = useContext(CommerceContext);
+  const { cart, handleCaptureCheckout, order, error } =
+    useContext(CommerceContext);
   const [activeStep, setActiveStep] = useState(0);
+  const [shippingData, setShippingData] = useState({});
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [isFinished, setIsFinished] = useState(false);
   const classes = useStyles();
+  const history = useNavigate();
 
   useEffect(() => {
     const generateToken = async () => {
@@ -29,19 +34,100 @@ const Checkout = () => {
         const res = await commerce.checkout.generateToken(cart.id, {
           type: 'cart',
         });
-        console.log('token:', res);
+        // console.log('token:', res);
         setCheckoutToken(res);
-      } catch (error) {}
+      } catch (error) {
+        // history('/');
+      }
     };
     generateToken();
   }, [cart]);
 
-  const Confirmation = () => <div>Confirmation</div>;
+  const nextStep = () => setActiveStep((prevActiveStep) => prevActiveStep + 1);
+
+  const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
+  const next = (data) => {
+    setShippingData(data);
+    nextStep();
+    console.log('Data:', shippingData);
+  };
+
+  // console.log('shipiData', shippingData);
+
+  const timeOut = () => {
+    setTimeout(() => {
+      setIsFinished(true);
+    }, 3000);
+  };
+
+  let Confirmation = () =>
+    // order.customer ? (
+    //   <>
+    //     <div>
+    //       <Typography variant="h5">
+    //         Merci pour votre achat, {order.customer.firstname}{' '}
+    //         {order.customer.lastname}!
+    //       </Typography>
+    //       <Divider className={classes.divider} />
+    //       <Typography variant="subtitle2">
+    //         Référence de commande: {order.customer_reference}
+    //       </Typography>
+    //     </div>
+    //     <br />
+    //     <Button component={Link} variant="outlined" type="button" to="/">
+    //       Retour à l'accueil
+    //     </Button>
+    //   </>
+    // ) :
+    isFinished ? (
+      <>
+        <div>
+          <Typography variant="h5">Merci pour votre achat !</Typography>
+          <Divider className={classes.divider} />
+        </div>
+        <br />
+        <Button component={Link} variant="outlined" type="button" to="/">
+          Retour à l'accueil
+        </Button>
+      </>
+    ) : (
+      <div className={classes.spinner}>
+        <CircularProgress />
+      </div>
+    );
+
+  if (error) {
+    Confirmation = () => (
+      <>
+        <Typography variant="h5">Error: {error}</Typography>
+        <br />
+        <Button component={Link} variant="outlined" type="button" to="/">
+          Retour à l'accueil
+        </Button>
+      </>
+    );
+  }
+
   const Form = () =>
     activeStep === 0 ? (
-      <AdressForm checkoutToken={checkoutToken} />
+      <AddressForm
+        checkoutToken={checkoutToken}
+        nextStep={nextStep}
+        setShippingData={setShippingData}
+        next={next}
+      />
     ) : (
-      <PaymentForm />
+      <PaymentForm
+        shippingData={shippingData}
+        checkoutToken={checkoutToken}
+        nextStep={nextStep}
+        backStep={backStep}
+        handleCaptureCheckout={handleCaptureCheckout}
+        order={order}
+        error={error}
+        timeOut={timeOut}
+      />
     );
 
   return (

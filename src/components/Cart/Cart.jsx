@@ -7,6 +7,8 @@ import { CommerceContext } from '../CommerceProvider';
 const Cart = () => {
   const { cart, handleUpdateCartQty, handleRemoveFromCart } =
     useContext(CommerceContext);
+  console.log('cart:', cart);
+
   const EmptyCart = () => (
     <p className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] text-[#182A49]">
       Vous n'avez aucun article dans votre panier,{' '}

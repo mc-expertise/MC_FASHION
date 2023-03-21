@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
+import { MenuItem, Select } from '@material-ui/core';
+import React, { useContext, useState } from 'react';
+import { CommerceContext } from '../CommerceProvider';
 
 const CartItem = ({ cart, handleUpdateCartQty, handleRemoveFromCart }) => {
-  const [less, setLess] = useState();
+  const [size, setSize] = useState(44);
 
+  const { products } = useContext(CommerceContext);
   return (
     <>
       <div className="">
@@ -26,6 +29,15 @@ const CartItem = ({ cart, handleUpdateCartQty, handleRemoveFromCart }) => {
             <div className=" flex flex-col gap-3">
               <p>{item.name}</p>
               <p>Livraison sous les 2-4 jours ouvrable</p>
+              <Select
+                fullWidth
+                value={size}
+                onChange={(e) => setSize(e.target.value)}>
+                <MenuItem value={44}>44</MenuItem>
+                <MenuItem value={46}>46</MenuItem>
+                <MenuItem value={48}>48</MenuItem>
+                <MenuItem value={50}>50</MenuItem>
+              </Select>
               <p className="flex justify-between items-center">
                 Quantiter:{' '}
                 <button

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import Navbar from './components/Navbar/Navbar';
 import Products from './components/Products/Products';
 import { Routes, Route } from 'react-router-dom';
@@ -6,9 +6,12 @@ import Home from './Pages/Home';
 import Collections from './Pages/Collections';
 import Cart from './components/Cart/Cart';
 import Recommander from './components/Recommander/Recommander';
-import CommerceProvider from './components/CommerceProvider';
+import CommerceProvider, {
+  CommerceContext,
+} from './components/CommerceProvider';
 import Checkout from './components/CheckoutForm/Checkout/Checkout';
 import FormInput from './components/CheckoutForm/FormInput';
+
 function App() {
   return (
     <div className="relative font-sans min-h-[100vh]">

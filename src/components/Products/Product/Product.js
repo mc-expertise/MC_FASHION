@@ -5,12 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useAnimation } from 'framer-motion';
 import { useEffect } from 'react';
 import { commerce } from '../../../libs/commerce';
-const Product = ({
-  product,
-  onAddToCart,
-
-  updatedCartQuantity,
-}) => {
+const Product = ({ product, onAddToCart }) => {
   const [variant, setVariant] = useState(null);
 
   useEffect(() => {
@@ -67,9 +62,7 @@ const Product = ({
       <div></div>
       <div className="w-full text-center mt-3 ">
         <button
-          onClick={() => {
-            onAddToCart(product.id, 1);
-          }}
+          onClick={() => onAddToCart(product.id, 1)}
           className="group px-4 py-3 bg-[#C8B790] rounded-xl text-[#182A49] font-bold w-[90%] text-xl relative shadow-lg 
   hover:bg-[#182A49] hover:text-white hover:shadow-md duration-500">
           ADD TO CART

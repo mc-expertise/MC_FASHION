@@ -7,7 +7,8 @@ const CommerceProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState(null);
   const [cart, setCart] = useState({});
-  const [cartQuantity, setCartQuantity] = useState(0);
+  const [order, setOrder] = useState({});
+  const [error, setError] = useState('');
 
   const fetchProducts = async () => {
     const { data } = await commerce.products.list();
@@ -16,16 +17,23 @@ const CommerceProvider = ({ children }) => {
   };
   //
 
+  //
+
   const fetchCart = async () => {
-    setCart(await commerce.cart.retrieve());
-    setCartQuantity(cart.total_items);
+    try {
+      const response = await commerce.cart.retrieve();
+      if (response) {
+        setCart(response);
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
   //
 
   const handleAddToCart = async (productId, quantity) => {
     const item = await commerce.cart.add(productId, quantity);
     setCart(item);
-    setCartQuantity((prevQuantity) => prevQuantity + quantity);
   };
 
   const fetchCategories = async () => {
@@ -36,7 +44,6 @@ const CommerceProvider = ({ children }) => {
   const handleUpdateCartQty = async (productId, quantity) => {
     const response = await commerce.cart.update(productId, { quantity });
     setCart(response);
-    setCartQuantity(response.total_items);
   };
 
   const handleRemoveFromCart = async (productId) => {
@@ -45,9 +52,29 @@ const CommerceProvider = ({ children }) => {
     setCart(response);
   };
 
-  Promise.all([fetchProducts(), fetchCart(), fetchCategories()]);
+  const refreshCart = async () => {
+    const newCart = await commerce.cart().refresh();
+    setCart(newCart);
+  };
 
-  const [updatedCartQuantity, setUpdatedCartQuantity] = useState(cartQuantity);
+  const handleCaptureCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+      setOrder(incomingOrder);
+      refreshCart();
+    } catch (error) {
+      setError(error.data.error.message);
+    }
+  };
+
+  useEffect(() => {
+    fetchProducts();
+    fetchCart();
+    fetchCategories();
+  }, []);
 
   return (
     <CommerceContext.Provider
@@ -55,9 +82,9 @@ const CommerceProvider = ({ children }) => {
         products,
         categories,
         cart,
-        cartQuantity,
-        updatedCartQuantity,
-        setUpdatedCartQuantity,
+        order,
+        error,
+        handleCaptureCheckout,
         handleAddToCart,
         handleUpdateCartQty,
         handleRemoveFromCart,
