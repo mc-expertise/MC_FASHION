@@ -24,7 +24,7 @@ const Recommander = () => {
                 <img
                   src={product.image.url}
                   alt="Product"
-                  className="rounded-2xl m-auto  "
+                  className="rounded-2xl m-auto h-[400px] "
                 />
                 <div className="flex justify-evenly m-2">
                   <p className="text-xl  font-semibold text-[#182A49]">
@@ -47,7 +47,9 @@ const Recommander = () => {
                     <li className="w-[35px] h-[35px] bg-[#C8B790] text-[#182A49] hover:text-white hover:bg-[#182A49] duration-500 rounded-full font-bold flex justify-center items-center">
                       48
                     </li>
-                    <li className="w-[35px] h-[35px] bg-[#C8B790] text-[#182A49] hover:text-white hover:bg-[#182A49] duration-500 rounded-full font-bold flex justify-center items-center"></li>
+                    <li className="w-[35px] h-[35px] bg-[#C8B790] text-[#182A49] hover:text-white hover:bg-[#182A49] duration-500 rounded-full font-bold flex justify-center items-center">
+                      50
+                    </li>
                   </ul>
                 </div>
                 <div className="w-full text-center mt-3 ">

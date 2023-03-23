@@ -19,14 +19,14 @@ import { Link, useNavigate } from 'react-router-dom';
 const steps = ['Adresse de livraison', 'Détails de paiement'];
 
 const Checkout = () => {
-  const { cart, handleCaptureCheckout, order, error } =
+  const { cart, handleCaptureCheckout, order, error, refreshCart } =
     useContext(CommerceContext);
   const [activeStep, setActiveStep] = useState(0);
   const [shippingData, setShippingData] = useState({});
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [isFinished, setIsFinished] = useState(false);
   const classes = useStyles();
-  const history = useNavigate();
+  const nagigate = useNavigate();
 
   useEffect(() => {
     const generateToken = async () => {
@@ -37,7 +37,7 @@ const Checkout = () => {
         // console.log('token:', res);
         setCheckoutToken(res);
       } catch (error) {
-        // history('/');
+        // if (activeStep !== steps.length) nagigate('/suits');
       }
     };
     generateToken();
@@ -48,9 +48,9 @@ const Checkout = () => {
   const backStep = () => setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
   const next = (data) => {
-    setShippingData(data);
+    setShippingData(shippingData);
+    console.log('Data:', data);
     nextStep();
-    console.log('Data:', shippingData);
   };
 
   // console.log('shipiData', shippingData);
@@ -58,6 +58,7 @@ const Checkout = () => {
   const timeOut = () => {
     setTimeout(() => {
       setIsFinished(true);
+      refreshCart();
     }, 3000);
   };
 

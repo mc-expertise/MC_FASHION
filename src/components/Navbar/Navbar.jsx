@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { NavLink, Link, useLocation } from 'react-router-dom';
 import { CommerceContext } from '../CommerceProvider';
 const Navbar = () => {
-  const { cart, updatedCartQuantity } = useContext(CommerceContext);
+  const { cart } = useContext(CommerceContext);
   // console.log('nvquantity:', updatedCartQuantity);
   const location = useLocation();
   return (

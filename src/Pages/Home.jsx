@@ -7,7 +7,6 @@ const Home = () => {
   return (
     <>
       <div className="bg-gradient-to-t from-[#182A49] to-[#0000] absolute w-[100%] max-h-[100%] bottom-0 ">
-        <input type="text" name="fds" id="sdfs" placeholder="ici" />
         <div className="relative lg:mb-0 mb-12 flex flex-col gap-1">
           <motion.h1
             initial={{ scale: 0, y: 60 }}
